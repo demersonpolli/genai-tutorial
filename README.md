@@ -219,6 +219,71 @@ Antes de integrar uma nova capacidade:
 
 Uma integração bem delimitada aumenta a velocidade e a consistência sem perder contexto, responsabilidade e qualidade.
 
+## Pontos de atenção ao usar IA
+
+Use a IA para apoiar o trabalho, mas mantenha senso crítico sobre as respostas, os dados e as ações que ela pode executar. O conteúdo gerado pode parecer correto e ainda conter erros, lacunas ou premissas inadequadas.
+
+### Alucinações
+
+Uma **alucinação** ocorre quando o modelo apresenta informação incorreta com aparência de certeza. Ela pode aparecer como um trecho de código plausível, uma API inexistente, uma fonte que não existe ou uma explicação técnica coerente, porém errada.
+
+Antes de aplicar uma resposta em algo importante:
+
+- Confirme fatos em fontes primárias ou documentação oficial.
+- Teste o código e valide o comportamento no ambiente adequado.
+- Verifique links, citações, dependências e nomes de APIs.
+- Peça ao modelo para indicar incertezas e suposições, sem tratar isso como substituto para a verificação.
+
+### Viés, lacunas e informação desatualizada
+
+Uma resposta pode ser bem escrita e ainda não representar seu contexto. Os dados de treinamento e as fontes recuperadas podem conter vieses, ter cobertura desigual ou não incluir mudanças recentes.
+
+| Risco | Pergunta de verificação |
+| --- | --- |
+| Contexto ausente | A resposta considera as regras, a arquitetura e as restrições do meu ambiente? |
+| Informação antiga | As versões, normas e práticas citadas ainda são válidas? |
+| Cobertura incompleta | Há casos extremos, outros idiomas ou públicos que ficaram de fora? |
+| Viés | A recomendação faz generalizações ou reproduz estereótipos? |
+
+Forneça o contexto necessário, compare alternativas e inclua pessoas com conhecimento do domínio nas revisões relevantes.
+
+### Autonomia e senso crítico
+
+Ganhar velocidade não deve reduzir a capacidade de entender e resolver problemas. Aceite uma sugestão somente quando conseguir explicar o que ela faz, por que se aplica ao caso e como você verificou seu resultado.
+
+Evite recorrer à IA antes de investigar o problema, copiar código que não consegue justificar ou deixar de praticar depuração. Use-a para acelerar a aprendizagem e o trabalho, não para delegar o entendimento.
+
+### Segurança, privacidade e confidencialidade
+
+Como regra prática, não envie a uma ferramenta de IA informações que você não publicaria em um fórum público, a menos que ela tenha sido aprovada para esse tipo de dado e ofereça os controles exigidos.
+
+Proteja especialmente:
+
+- Credenciais, tokens, senhas e chaves de API.
+- Dados pessoais e registros de clientes ou usuários.
+- Código, documentos e contratos confidenciais.
+- Informações estratégicas, acordos de confidencialidade e logs com identificadores sensíveis.
+
+Antes de usar uma ferramenta, confirme onde os dados serão processados, se os dados podem ser usados para treinamento, quais controles de retenção e acesso existem e se há registro de auditoria.
+
+### Prompts e iteração
+
+Prompts vagos produzem respostas genéricas. Explique o contexto, o objetivo, as restrições técnicas e o formato desejado.
+
+Se a resposta vier incompleta, peça mais detalhes. Se vier errada, informe o erro observado e solicite uma correção. Teste o resultado antes de adotá-lo. Trate a conversa como um ciclo de iteração, não como uma consulta a uma fonte infalível.
+
+### Governança em equipe
+
+Times precisam de regras compartilhadas para usar IA de forma segura e consistente.
+
+1. Defina ferramentas aprovadas, tipos de dados permitidos e dados proibidos.
+2. Exija revisão humana para código, decisões e entregas de alto impacto.
+3. Registre quando a IA influenciar decisões relevantes ou produzir partes significativas de uma entrega.
+4. Mantenha permissões mínimas e monitore o uso das integrações.
+5. Atualize as orientações conforme surgirem novos riscos, ferramentas ou requisitos.
+
+Transparência e revisão tornam o uso de IA mais confiável e facilitam a responsabilização quando algo precisa ser corrigido.
+
 ## Próximos passos
 
 Escolha um processo simples, descreva a tarefa em um prompt estruturado e defina quais fontes ou ferramentas seriam realmente necessárias. Depois, avalie o resultado com exemplos reais e ajuste o fluxo antes de automatizar mais etapas.
