@@ -290,4 +290,4 @@ Escolha um processo simples, descreva a tarefa em um prompt estruturado e defina
 
 ## Licença
 
-Adicione uma licença apropriada antes de reutilizar este material em outros projetos.
+Este material está licenciado sob a [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
