@@ -8,7 +8,7 @@ O objetivo é criar um mapa mental prático. Você não precisa de matemática a
 
 Uma aplicação de IA generativa pode receber uma solicitação, complementar o contexto com fontes confiáveis, decidir se precisa executar uma ação e devolver um resultado.
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     U[Pessoa usuária] --> P[Prompt]
     P --> L[LLM]
@@ -18,7 +18,7 @@ flowchart LR
     M[MCP] --- A
     M --- T
     T --> O[Resultado]
-\`\`\`
+```
 
 ## 1. Modelos de linguagem de grande porte (LLMs)
 
@@ -50,17 +50,17 @@ Uma estrutura simples inclui:
 
 Prompt pouco específico:
 
-\`\`\`text
+```text
 Fale sobre IA.
-\`\`\`
+```
 
 Prompt estruturado:
 
-\`\`\`text
+```text
 Atue como analista de RH. Liste três riscos do uso de IA
 em uma empresa que ainda não possui política interna.
 Use tópicos curtos e inclua uma medida de mitigação para cada risco.
-\`\`\`
+```
 
 Refine o prompt quando a primeira resposta não atender ao objetivo. Acrescente contexto, restrições, exemplos ou critérios de avaliação.
 
@@ -70,13 +70,13 @@ Refine o prompt quando a primeira resposta não atender ao objetivo. Acrescente 
 
 Isso permite que a IA responda com base em documentos privados ou atualizados, como políticas internas, contratos, manuais e artigos técnicos.
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     Q[Pergunta] --> S[Busca na base]
     S --> C[Trechos relevantes]
     C --> L[LLM]
     L --> A[Resposta com contexto]
-\`\`\`
+```
 
 ### O que RAG resolve
 
@@ -119,13 +119,13 @@ O **Model Context Protocol** (MCP) é um protocolo aberto para conectar aplicaç
 
 Em vez de cada aplicação implementar uma integração exclusiva para cada serviço, um servidor MCP pode expor recursos e ferramentas por uma interface comum. Clientes compatíveis conseguem descobrir e usar essas capacidades conforme suas permissões.
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     C[Cliente de IA] --> M[Servidor MCP]
     M --> G[Email]
     M --> D[Documentos]
     M --> S[Sistemas internos]
-\`\`\`
+```
 
 MCP não substitui autenticação, autorização ou políticas de segurança. Cada integração continua precisando de controles adequados para os dados e ações que expõe.
 
