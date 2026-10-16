@@ -1,1 +1,160 @@
-# Todo
+# Fundamentos de IA Generativa
+
+Este tutorial apresenta os principais blocos que compõem aplicações modernas de IA generativa: modelos de linguagem, prompts, recuperação de conhecimento, ferramentas, agentes e protocolos de integração.
+
+O objetivo é criar um mapa mental prático. Você não precisa de matemática avançada nem de código para acompanhar.
+
+## Visão geral
+
+Uma aplicação de IA generativa pode receber uma solicitação, complementar o contexto com fontes confiáveis, decidir se precisa executar uma ação e devolver um resultado.
+
+\`\`\`mermaid
+flowchart LR
+    U[Pessoa usuária] --> P[Prompt]
+    P --> L[LLM]
+    R[RAG: dados relevantes] --> L
+    L --> A[Agente]
+    A --> T[Ferramentas]
+    M[MCP] --- A
+    M --- T
+    T --> O[Resultado]
+\`\`\`
+
+## 1. Modelos de linguagem de grande porte (LLMs)
+
+Um **Large Language Model** (LLM) é um modelo treinado em grandes coleções de texto para produzir e transformar linguagem. Durante a geração, ele estima quais tokens têm maior probabilidade de continuar uma sequência, considerando o contexto recebido.
+
+Interfaces como chatbots, assistentes de escrita e copilotos costumam usar um LLM como mecanismo central.
+
+### Pontos importantes
+
+- O modelo produz respostas a partir de padrões aprendidos e do contexto enviado na conversa.
+- Ele pode gerar conteúdo convincente mesmo quando uma informação está incorreta ou não está disponível.
+- O resultado depende do modelo, do prompt, dos dados de contexto e das ferramentas disponíveis.
+- Para fatos que exigem precisão ou atualização, use fontes verificáveis e mantenha revisão humana quando necessário.
+
+## 2. Prompts e engenharia de prompts
+
+Um **prompt** é a instrução enviada ao modelo. Um pedido bem estruturado reduz ambiguidades e torna a resposta mais útil.
+
+Uma estrutura simples inclui:
+
+| Elemento | Pergunta que ajuda a escrever | Exemplo |
+| --- | --- | --- |
+| Papel | Qual perspectiva o modelo deve adotar? | “Atue como analista de RH.” |
+| Tarefa | O que deve ser feito? | “Liste os riscos de usar IA.” |
+| Contexto | Que fatos, limites ou dados importam? | “Considere uma empresa sem política interna de uso.” |
+| Formato | Como a resposta deve ser entregue? | “Use três tópicos curtos.” |
+
+### Exemplo
+
+Prompt pouco específico:
+
+\`\`\`text
+Fale sobre IA.
+\`\`\`
+
+Prompt estruturado:
+
+\`\`\`text
+Atue como analista de RH. Liste três riscos do uso de IA
+em uma empresa que ainda não possui política interna.
+Use tópicos curtos e inclua uma medida de mitigação para cada risco.
+\`\`\`
+
+Refine o prompt quando a primeira resposta não atender ao objetivo. Acrescente contexto, restrições, exemplos ou critérios de avaliação.
+
+## 3. RAG: geração aumentada por recuperação
+
+**RAG** significa *Retrieval-Augmented Generation*. Antes de responder, a aplicação procura conteúdos relevantes em uma base de conhecimento e entrega esses trechos ao modelo como contexto.
+
+Isso permite que a IA responda com base em documentos privados ou atualizados, como políticas internas, contratos, manuais e artigos técnicos.
+
+\`\`\`mermaid
+flowchart LR
+    Q[Pergunta] --> S[Busca na base]
+    S --> C[Trechos relevantes]
+    C --> L[LLM]
+    L --> A[Resposta com contexto]
+\`\`\`
+
+### O que RAG resolve
+
+Sem recuperação de conhecimento, um assistente pode não conhecer a versão atual de uma política ou manual. Com RAG, ele consulta a fonte antes de formular a resposta.
+
+RAG não elimina a necessidade de avaliar qualidade. A base precisa ter conteúdo confiável, permissões adequadas, boa indexação e referências que permitam verificar a origem da resposta.
+
+## 4. Ferramentas e uso de ferramentas
+
+Por si só, um modelo de linguagem gera texto. Quando uma aplicação conecta o modelo a **ferramentas**, ela pode executar operações controladas fora da conversa.
+
+Exemplos comuns:
+
+- Pesquisar informações atuais na web.
+- Consultar uma API ou sistema interno.
+- Criar documentos, planilhas ou relatórios.
+- Enviar uma mensagem após confirmação.
+- Navegar por uma página para extrair dados.
+- Executar código ou análises sobre um conjunto de dados.
+
+Uma ferramenta deve ter uma finalidade clara, limites de acesso e validações antes de qualquer ação sensível. Descreva ao modelo quando usar a ferramenta, quais parâmetros ela aceita e o que fazer caso ela falhe.
+
+## 5. Agentes de IA
+
+Um **agente de IA** coordena um ou mais passos para alcançar um objetivo. Ele pode interpretar a solicitação, buscar contexto, escolher ferramentas, verificar resultados e solicitar intervenção humana quando necessário.
+
+Há um espectro de automação:
+
+| Tipo | Comportamento típico |
+| --- | --- |
+| Chatbot | Responde a uma pergunta por vez. |
+| Assistente | Executa uma sequência de etapas definida. |
+| Agente | Planeja e coordena etapas, contexto e ferramentas dentro de limites estabelecidos. |
+
+Casos de uso incluem organizar informações, preparar rascunhos, atender solicitações com consulta a bases autorizadas e monitorar processos. Quanto maior a autonomia, mais importantes se tornam permissões, rastreabilidade, testes e pontos de aprovação humana.
+
+## 6. MCP: Model Context Protocol
+
+O **Model Context Protocol** (MCP) é um protocolo aberto para conectar aplicações de IA a ferramentas e fontes de contexto de forma padronizada.
+
+Em vez de cada aplicação implementar uma integração exclusiva para cada serviço, um servidor MCP pode expor recursos e ferramentas por uma interface comum. Clientes compatíveis conseguem descobrir e usar essas capacidades conforme suas permissões.
+
+\`\`\`mermaid
+flowchart LR
+    C[Cliente de IA] --> M[Servidor MCP]
+    M --> G[Email]
+    M --> D[Documentos]
+    M --> S[Sistemas internos]
+\`\`\`
+
+MCP não substitui autenticação, autorização ou políticas de segurança. Cada integração continua precisando de controles adequados para os dados e ações que expõe.
+
+## 7. Como os componentes se conectam
+
+Um fluxo típico combina os conceitos deste tutorial:
+
+1. A pessoa usuária envia uma solicitação.
+2. O prompt define a tarefa, o contexto e o formato esperado.
+3. O LLM interpreta o contexto e prepara uma resposta ou uma próxima ação.
+4. Se necessário, RAG recupera documentos relevantes.
+5. Um agente coordena as etapas e decide quando usar uma ferramenta.
+6. As integrações podem ser disponibilizadas por MCP.
+7. A aplicação devolve o resultado e registra as evidências necessárias.
+
+## Boas práticas iniciais
+
+- Comece com um caso de uso pequeno e critérios claros de sucesso.
+- Use dados autorizados e aplique o princípio de menor privilégio.
+- Exiba fontes quando a resposta depende de recuperação de documentos.
+- Valide saídas antes de executar ações externas ou irreversíveis.
+- Registre chamadas de ferramentas, resultados e falhas para auditoria.
+- Teste situações comuns, ambíguas e adversas antes de ampliar o acesso.
+- Mantenha uma pessoa responsável por aprovar mudanças de alto impacto.
+
+## Próximos passos
+
+Escolha um processo simples, descreva a tarefa em um prompt estruturado e defina quais fontes ou ferramentas seriam realmente necessárias. Depois, avalie o resultado com exemplos reais e ajuste o fluxo antes de automatizar mais etapas.
+
+## Licença
+
+Adicione uma licença apropriada antes de reutilizar este material em outros projetos.
